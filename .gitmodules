@@ -7,3 +7,6 @@
 [submodule "exercises/dapps_development_educateth_course/foundry_project/lib/openzeppelin-foundry-upgrades"]
 	path = exercises/dapps_development_educateth_course/foundry_project/lib/openzeppelin-foundry-upgrades
 	url = https://github.com/OpenZeppelin/openzeppelin-foundry-upgrades
+[submodule "exercises/dapps_development_educateth_course/foundry_project/lib/openzeppelin-contracts-upgradeable"]
+	path = exercises/dapps_development_educateth_course/foundry_project/lib/openzeppelin-contracts-upgradeable
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
