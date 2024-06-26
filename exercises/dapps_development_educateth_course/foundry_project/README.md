@@ -1,66 +1,82 @@
-## Foundry
+# NFT ERC721 Smart Contract Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project demonstrates the deployment and testing of an ERC721 standard NFT smart contract using Foundry. The contract has been deployed and verified on the Arbitrum Sepolia testnet.
 
-Foundry consists of:
+## Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **Contract:** ERC721 standard NFT
+- **Tools:** Foundry for compilation, testing, and deployment
+- **Networks:** Local environment and Arbitrum Sepolia testnet
+- **Verification:** Contract verified on Arbitrum Sepolia Block Explorer
 
-## Documentation
+## Steps Completed
 
-https://book.getfoundry.sh/
+1. **Contract Creation**
 
-## Usage
+   - Created an NFT smart contract implementing the ERC721 standard.
 
-### Build
+2. **Compilation**
 
-```shell
-$ forge build
-```
+   - Compiled the smart contract using Foundry.
 
-### Test
+3. **Testing**
 
-```shell
-$ forge test
-```
+   - Created and executed two tests to validate the contract functionality and to reinforce learnings from the development course.
 
-### Format
+4. **Local Deployment**
 
-```shell
-$ forge fmt
-```
+   - Deployed the smart contract locally to ensure correct functionality before deploying to a public testnet.
 
-### Gas Snapshots
+5. **Testnet Deployment**
+   - Deployed the smart contract to the Arbitrum Sepolia testnet.
+   - Verified the smart contract on the Arbitrum Sepolia Block Explorer.
 
-```shell
-$ forge snapshot
-```
+## Contract Verification
 
-### Anvil
+The deployed contract can be verified on the Arbitrum Sepolia Block Explorer using the following link: [Arbitrum Sepolia Contract Verification](https://sepolia.arbiscan.io/address/0x0148143a06e08825a3d0f6507b6b093688ede2ca).
 
-```shell
-$ anvil
-```
+## Purpose
 
-### Deploy
+This project was completed as part of the steps required to achieve certification in the EDUCATETH DApp Development Course.
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+## How to Use
 
-### Cast
+1. **Clone the Repository**
 
-```shell
-$ cast <subcommand>
-```
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-### Help
+2. **Install Dependencies**
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+   ```bash
+   forge install
+   ```
+
+3. **Compile the Contract**
+
+   ```bash
+   forge build
+   ```
+
+4. **Run Tests**
+
+   ```bash
+   forge test
+   ```
+
+5. **Deploy Locally**
+
+   ```bash
+   forge script DeployScript --rpc-url http://localhost:8545 --private-key <your-private-key>
+   ```
+
+6. **Deploy to Arbitrum Sepolia Testnet**
+   ```bash
+   forge script DeployScript --rpc-url https://sepolia.arbitrum.io/rpc --private-key <your-private-key>
+   ```
+
+## Contributing
+
+Feel free to submit issues or pull requests if you have suggestions or improvements.
