@@ -13,3 +13,6 @@
 [submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/forge-std"]
 	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/chainlink-brownie-contracts"]
+	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/chainlink-brownie-contracts
+	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
