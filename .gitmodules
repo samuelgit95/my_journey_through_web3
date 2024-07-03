@@ -16,3 +16,6 @@
 [submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/chainlink-brownie-contracts"]
 	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/foundry-devops"]
+	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-fund-me-f23/lib/foundry-devops
+	url = https://github.com/Cyfrin/foundry-devops
