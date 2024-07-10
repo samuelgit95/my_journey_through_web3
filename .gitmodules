@@ -25,3 +25,9 @@
 [submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-smart-contract-lottery-f23/lib/chainlink-brownie-contracts"]
 	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-smart-contract-lottery-f23/lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-smart-contract-lottery-f23/lib/solmate"]
+	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-smart-contract-lottery-f23/lib/solmate
+	url = https://github.com/transmissions11/solmate
+[submodule "exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-smart-contract-lottery-f23/lib/foundry-devops"]
+	path = exercises/cyfrin_updraft/foundry_fundamentals/foundry-f23/foundry-smart-contract-lottery-f23/lib/foundry-devops
+	url = https://github.com/Cyfrin/foundry-devops
