@@ -1,66 +1,47 @@
-## Foundry
+# Decentralized Lottery Smart Contract Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project demonstrates the deployment and testing of a decentralized lottery smart contract using Foundry. The project was completed as part of the Foundry Fundamentals course by Cyfrin Updraft. For more information about the course, visit [Foundry Smart Contract Lottery CU](https://github.com/Cyfrin/foundry-smart-contract-lottery-cu).
 
-Foundry consists of:
+## Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- **Contract:** Decentralized Lottery
+- **VRF:** Utilizes Chainlink VRF for secure and random winner selection.
+- **Automation:** Uses Chainlink Automation to automatically execute the winner selection function.
+- **Libraries:**
+  - chainlink-brownie-contracts
+  - cyfrin/foundry-devops
+  - transmissions11/solmate
+- **Pattern:** Implements the Checks-Effects-Interactions (CEI) pattern in contract functions.
+- **Networks:** Configured for both local and Ethereum Sepolia test networks.
 
-## Documentation
+## Features
 
-https://book.getfoundry.sh/
+1. **Decentralized Lottery Contract**
 
-## Usage
+   - Implements a secure, random, and automated lottery system.
 
-### Build
+2. **Chainlink VRF Integration**
 
-```shell
-$ forge build
-```
+   - Ensures random and fair winner selection using Chainlink's Verifiable Random Function (VRF).
 
-### Test
+3. **Chainlink Automation**
 
-```shell
-$ forge test
-```
+   - Automates the execution of the winner selection function using Chainlink Automation.
 
-### Format
+4. **CEI Pattern**
 
-```shell
-$ forge fmt
-```
+   - Ensures best practices in contract function implementation with the Checks-Effects-Interactions pattern.
 
-### Gas Snapshots
+5. **Local and Testnet Deployment**
 
-```shell
-$ forge snapshot
-```
+   - Configured for deployment and testing on both local environments and the Ethereum Sepolia testnet.
 
-### Anvil
+6. **Testing**
+   - Multiple unit tests created.
+   - Introduction to fuzzing testing.
+   - Event emission testing.
+   - Time manipulation for tests requiring time-based conditions.
 
-```shell
-$ anvil
-```
+## Notes
 
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This project documents my progress in learning web3 concepts. To replicate this project, I recommend following the official repository of the Foundry Fundamentals course by Cyfrin Updraft.
