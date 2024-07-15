@@ -1,66 +1,70 @@
-## Foundry
+# OurToken ERC20 Smart Contract
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project is a simple ERC20 token implementation using Solidity and Foundry. The token is named "OurToken" with the symbol "OT". The project includes the token contract, deployment script, and comprehensive tests.
 
-Foundry consists of:
+## Getting Started
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### Prerequisites
 
-## Documentation
+- [Foundry](https://getfoundry.sh/)
 
-https://book.getfoundry.sh/
+### Installing
 
-## Usage
+1. Clone the repository:
 
-### Build
+2. Install dependencies:
 
-```shell
-$ forge build
+```sh
+make install
 ```
 
-### Test
+### Building
 
-```shell
-$ forge test
+To build the project, run:
+
+```sh
+make build
 ```
 
-### Format
+### Running Tests
 
-```shell
-$ forge fmt
+To run the tests, use:
+
+```sh
+make test
 ```
 
-### Gas Snapshots
+### Deploying
 
-```shell
-$ forge snapshot
+You can deploy the smart contract to a local Anvil instance or to the Sepolia testnet.
+
+#### Deploy to Local Anvil
+
+1. Start Anvil:
+
+```sh
+make anvil
 ```
 
-### Anvil
+2. Deploy the contract (In a different terminal tab):
 
-```shell
-$ anvil
+```sh
+make deploy
 ```
 
-### Deploy
+### Deploy to Sepolia Testnet
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+1. Set up your environment variables in a .env file:
+
+```env
+SEPOLIA_RPC_URL=<your_sepolia_rpc_url>
+ACCOUNT=<your_account>
+SENDER=<your_sender>
+ETHERSCAN_API_KEY=<your_etherscan_api_key>
 ```
 
-### Cast
+2. Deploy the contract:
 
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+```sh
+make deploy-sepolia
 ```
