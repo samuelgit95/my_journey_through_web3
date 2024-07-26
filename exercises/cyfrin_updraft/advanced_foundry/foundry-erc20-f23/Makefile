@@ -32,3 +32,6 @@ deploy:
 
 deploy-sepolia:
 	@forge script script/DeployOurToken.s.sol:DeployOurToken --rpc-url $(SEPOLIA_RPC_URL) --account $(ACCOUNT) --sender $(SENDER) --etherscan-api-key $(ETHERSCAN_API_KEY) --broadcast --verify
+
+deploy-arbitrum-sepolia:
+	@forge script script/DeployOurToken.s.sol:DeployOurToken --rpc-url $(ARBITRUM_SEPOLIA_RPC_URL) --private-key $(ARBITRUM_SEPOLIA_PRIVATE_KEY) --broadcast
