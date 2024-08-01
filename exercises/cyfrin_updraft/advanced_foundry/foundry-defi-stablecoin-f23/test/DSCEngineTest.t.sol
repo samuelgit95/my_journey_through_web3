@@ -38,6 +38,8 @@ contract DSCEngineTest is Test {
     uint256 public constant AMOUNT_COLLATERAL = 10 ether;
     uint256 public constant STARTING_ERC20_BALANCE = 10 ether;
 
+    event CollateralDeposited(address indexed user, address indexed token, uint256 indexed amount);
+
     function setUp() external {
         DeployDSC deployer = new DeployDSC();
         (dsc, dsce, helperConfig) = deployer.run();
@@ -118,5 +120,43 @@ contract DSCEngineTest is Test {
         uint256 expectedCollateralValueInUsd = dsce.getTokenAmountFromUsd(weth, collateralValueInUsd);
         assertEq(totalDscMinted, expectedTotalDscMinted);
         assertEq(AMOUNT_COLLATERAL, expectedCollateralValueInUsd);
+    }
+
+    function testDepositCollateralEmitsEvent() public {
+        vm.startPrank(USER);
+        ERC20Mock(weth).approve(address(dsce), AMOUNT_COLLATERAL);
+
+        vm.expectEmit(true, true, false, true);
+        emit CollateralDeposited(USER, weth, AMOUNT_COLLATERAL);
+        dsce.depositCollateral(weth, AMOUNT_COLLATERAL);
+
+        vm.stopPrank();
+    }
+
+    function testDepositCollateralTransfersTokens() public {
+        vm.startPrank(USER);
+        ERC20Mock(weth).approve(address(dsce), AMOUNT_COLLATERAL);
+        uint256 initialBalance = ERC20Mock(weth).balanceOf(USER);
+
+        dsce.depositCollateral(weth, AMOUNT_COLLATERAL);
+        uint256 finalBalance = ERC20Mock(weth).balanceOf(USER);
+
+        assertEq(initialBalance - AMOUNT_COLLATERAL, finalBalance);
+
+        vm.stopPrank();
+    }
+
+    function testCalculateHealthFactor() public depositedCollateral {
+        // Mint some DSC to create a debt
+        vm.startPrank(USER);
+        dsce.mintDsc(1 ether); // Mint 1 DSC
+        vm.stopPrank();
+
+        (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce.getAccountInformation(USER);
+        uint256 expectedHealthFactor = dsce.getCalculatedHealthFactor(totalDscMinted, collateralValueInUsd);
+
+        uint256 actualHealthFactor = dsce.getHealthFactor(USER);
+
+        assertEq(expectedHealthFactor, actualHealthFactor, "Health factor calculation is incorrect");
     }
 }
