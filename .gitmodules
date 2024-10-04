@@ -55,3 +55,6 @@
 [submodule "exercises/cyfrin_updraft/advanced_foundry/foundry-defi-stablecoin-f23/lib/chainlink-brownie-contracts"]
 	path = exercises/cyfrin_updraft/advanced_foundry/foundry-defi-stablecoin-f23/lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "exercises/cyfrin_updraft/security_course/fuzzing_exercise/lib/forge-std"]
+	path = exercises/cyfrin_updraft/security_course/fuzzing_exercise/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
