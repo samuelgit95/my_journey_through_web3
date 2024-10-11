@@ -58,3 +58,12 @@
 [submodule "exercises/cyfrin_updraft/security_course/fuzzing_exercise/lib/forge-std"]
 	path = exercises/cyfrin_updraft/security_course/fuzzing_exercise/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "exercises/codehawks/2023-11-Santas-List/lib/forge-std"]
+	path = exercises/codehawks/2023-11-Santas-List/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "exercises/codehawks/2023-11-Santas-List/lib/openzeppelin-contracts"]
+	path = exercises/codehawks/2023-11-Santas-List/lib/openzeppelin-contracts
+	url = https://github.com/openzeppelin/openzeppelin-contracts
+[submodule "exercises/codehawks/2023-11-Santas-List/lib/solmate-bad"]
+	path = exercises/codehawks/2023-11-Santas-List/lib/solmate-bad
+	url = https://github.com/patrickalphac/solmate-bad

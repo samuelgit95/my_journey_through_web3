@@ -66,6 +66,8 @@ contract SantasList is ERC721, TokenUri {
     /*//////////////////////////////////////////////////////////////
                                  TYPES
     //////////////////////////////////////////////////////////////*/
+    // @audit NOT_CHECKED_TWICE is not mentioned in the documentation, should replaced for UNKNOWN
+    // also the first option (The default option) should be UNKNOWN, not NICE or EXTRA_NICE
     enum Status {
         NICE,
         EXTRA_NICE,
@@ -118,6 +120,7 @@ contract SantasList is ERC721, TokenUri {
      * @param person The person to check
      * @param status The status of the person
      */
+    // @audit the modifier onlySanta is not used, anyone can call this
     function checkList(address person, Status status) external {
         s_theListCheckedOnce[person] = status;
         emit CheckedOnce(person, status);

@@ -12,7 +12,7 @@ contract SantasListTest is Test {
 
     address user = makeAddr("user");
     address santa = makeAddr("santa");
-    _CheatCodes cheatCodes = _CheatCodes(HEVM_ADDRESS);
+    _CheatCodes cheatCodes = _CheatCodes(VM_ADDRESS);
 
     function setUp() public {
         vm.startPrank(santa);
@@ -151,5 +151,27 @@ contract SantasListTest is Test {
         cmds[0] = "touch";
         cmds[1] = string.concat("youve-been-pwned");
         cheatCodes.ffi(cmds);
+    }
+
+    function testAnyOneCanCallCheckList() public {
+        address addr = makeAddr("sam");
+        santasList.checkList(addr, SantasList.Status.EXTRA_NICE);
+        assertEq(uint256(SantasList.Status.EXTRA_NICE), uint256(santasList.getNaughtyOrNiceOnce((addr))));
+    }
+
+    function testWrongDefaultStatus() public {
+        assertEq(uint256(SantasList.Status.NICE), uint256(santasList.getNaughtyOrNiceOnce(user)));
+        assertEq(uint256(SantasList.Status.NICE), uint256(santasList.getNaughtyOrNiceTwice(user)));
+    }
+
+    function testCollectPresentWithDefaultStatus() public {
+        vm.warp(santasList.CHRISTMAS_2023_BLOCK_TIME() + 1);
+        vm.startPrank(user);
+        santasList.collectPresent();
+        vm.stopPrank();
+
+        assertEq(santasList.balanceOf(user), 1);
+        assertEq(uint256(SantasList.Status.NICE), uint256(santasList.getNaughtyOrNiceOnce(user)));
+        assertEq(uint256(SantasList.Status.NICE), uint256(santasList.getNaughtyOrNiceTwice(user)));
     }
 }
