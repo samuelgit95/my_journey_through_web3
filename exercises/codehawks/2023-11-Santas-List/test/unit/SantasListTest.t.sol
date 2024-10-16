@@ -174,4 +174,22 @@ contract SantasListTest is Test {
         assertEq(uint256(SantasList.Status.NICE), uint256(santasList.getNaughtyOrNiceOnce(user)));
         assertEq(uint256(SantasList.Status.NICE), uint256(santasList.getNaughtyOrNiceTwice(user)));
     }
+
+    function testAnyoneCanBuyPresent() public {
+        vm.startPrank(santa);
+        santasList.checkList(user, SantasList.Status.EXTRA_NICE);
+        santasList.checkTwice(user, SantasList.Status.EXTRA_NICE);
+        vm.stopPrank();
+        vm.warp(santasList.CHRISTMAS_2023_BLOCK_TIME() + 1);
+        vm.startPrank(user);
+        santasList.collectPresent();
+        vm.stopPrank();
+
+        address attacker = makeAddr("attacker");
+        vm.startPrank(attacker);
+        santasList.buyPresent(user);
+        vm.stopPrank();
+
+        assertEq(santasList.balanceOf(attacker), 1);
+    }
 }
