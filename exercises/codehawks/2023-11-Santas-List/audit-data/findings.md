@@ -121,3 +121,41 @@ Note that this implementation implies :
         _safeMint(mintAddress, s_tokenCounter++);
     }
 ```
+
+### [H-4] `EXTRA_NICE` people can mint unlimited amount of present and tokens
+
+**Description** A user checked by Santa as `EXTRA_NICE` can claim a token and an NFT calling `collectPresent` function, then buy for himself another NFT with `buyPresent` function, send the two NFTs to another address and repeat the process multiple times
+
+**Impact** A user can mint unlimited amout of NFTs and tokens
+
+**Proof of Concepts**
+
+```javascript
+function testExtraNicePeopleCanMintUnlimitedAmountsOfPresentsAndTokens() public {
+        address attacker = makeAddr("attacker");
+        vm.startPrank(santa);
+        santasList.checkList(user, SantasList.Status.EXTRA_NICE);
+        santasList.checkTwice(user, SantasList.Status.EXTRA_NICE);
+        vm.stopPrank();
+        vm.warp(santasList.CHRISTMAS_2023_BLOCK_TIME() + 1);
+        vm.startPrank(user);
+        santasList.collectPresent();
+        santasList.buyPresent(user);
+        santasList.safeTransferFrom(user, attacker, 0);
+        santasList.safeTransferFrom(user, attacker, 1);
+        santasList.collectPresent();
+        santasList.buyPresent(user);
+        santasList.safeTransferFrom(user, attacker, 2);
+        santasList.safeTransferFrom(user, attacker, 3);
+        vm.stopPrank();
+
+        assertEq(santasList.balanceOf(attacker), 4);
+    }
+```
+
+**Recommended mitigation** Mapping of `s_tokenCounter` is setup but not actually used in the function to check for duplicate claims for users. It is also not a mapping from a user's address to their count of tokens.
+
+instead of `uint256 private s_tokenCounter;`
+use `mapping(address person => uint256 countOfSantasPresentClaimed) private s_tokenCounter;`
+
+and in the `_mintAndIncrement()` function, adjust the `s_tokenCounter` to `s_tokenCounter[msg.sender]++`

